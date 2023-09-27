@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 import os
 import numpy as np
 
-
+# This only works for binary classification I think
 def get_accuracy(predicted, true):
     return np.mean(predicted == true)
 
@@ -16,7 +16,7 @@ categories = ['alt.atheism', 'sci.med'] # label 1 means it's sci-med
 
 train_df = pd.read_csv(os.path.join(data_dir, "newsgroup_train.csv"), sep='\t')
 test_df = pd.read_csv(os.path.join(data_dir, "newsgroup_test.csv"), sep='\t')
-
+print(train_df.head())
 text_clf = Pipeline([
     ('vect', CountVectorizer()),
     ('tfidf', TfidfTransformer()),
