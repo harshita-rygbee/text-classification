@@ -31,12 +31,13 @@ def get_data():
     label_column_name = "label_name"
     train_df = train_df.rename(columns={label_column_name: "labels"})
     test_df = test_df.rename(columns={label_column_name: "labels"})
+    label_column_name = "labels"
     train_df[label_column_name] = train_df[label_column_name].apply(lambda x: readable_labels[x])
     test_df[label_column_name] = test_df[label_column_name].apply(lambda x: readable_labels[x])
     label_names = list(train_df[label_column_name].unique())
     label_names_for_prompt = '", "'.join(label_names)
     intro = f'USER: You are given a list of labels: "{label_names_for_prompt}". Your task is to classify the following text into one of these labels. Here are some examples:\n'
-    examples = '\n'.join('"' + train_df["query"] + '" => "' + train_df["labels"] + '"') + '\n\n'
+    examples = '\n'.join('"' + train_df["text"] + '" => "' + train_df["labels"] + '"') + '\n\n'
     full_prompt = intro + examples
     # tests = (full_prompt + 'Please label the following query: "' + test_df['query'] + '"\n\nSYSTEM:').tolist()
     tests = (full_prompt + 'Please classify the query "' + test_df['text'] + '"into one of the given labels. Only reply with the label.\n\nSYSTEM:').tolist()
