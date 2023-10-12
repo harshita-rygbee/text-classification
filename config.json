@@ -1,0 +1,38 @@
+{
+    "LoRA": {
+        "r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.1,
+        "bias": "none",
+        "task_type": "CAUSAL_LM"
+    },
+
+    "bitsandbytes": {
+        "load_in_4bit": true,
+        "bnb_4bit_use_double_quant": true,
+        "bnb_4bit_quant_type": "nf4",
+        "bnb_4bit_compute_dtype": "bfloat16"
+    },
+
+    "trainer": {
+        "num_train_epochs": 3,
+        "logging_steps": 10,
+        "eval_steps": 250,
+        "evaluation_strategy": "steps",
+        "gradient_accumulation_steps": 4,
+        "warmup_steps": 100,
+        "learning_rate": 1e-4,
+        "optim": "paged_adamw_32bit",
+        "fp16": true,
+        "auto_find_batch_size": true,
+        "report_to": "tensorboard"
+    },
+
+    "datapath": "data/emotion_my_format",
+    "train_file": "train.csv",
+    "eval_file": "val.csv",
+    "top_n_samples": "none",
+
+    "llama_num_params": 13,
+    "output_dir": "results"
+}

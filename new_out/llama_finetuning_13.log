@@ -1,0 +1,52 @@
+/var/spool/slurmd/job01301/slurm_script: line 7: cd: /local/scratch3/hsahijw/llama/: No such file or directory
+no change     /home/hsahijw/miniconda3/condabin/conda
+no change     /home/hsahijw/miniconda3/bin/conda
+no change     /home/hsahijw/miniconda3/bin/conda-env
+no change     /home/hsahijw/miniconda3/bin/activate
+no change     /home/hsahijw/miniconda3/bin/deactivate
+no change     /home/hsahijw/miniconda3/etc/profile.d/conda.sh
+no change     /home/hsahijw/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/hsahijw/miniconda3/shell/condabin/Conda.psm1
+no change     /home/hsahijw/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/hsahijw/miniconda3/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /home/hsahijw/miniconda3/etc/profile.d/conda.csh
+no change     /home/hsahijw/.bashrc
+No action taken.
+2023-10-12 00:16:13.937183: I tensorflow/core/util/port.cc:111] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-10-12 00:16:13.994702: E tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:9342] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-10-12 00:16:13.994751: E tensorflow/compiler/xla/stream_executor/cuda/cuda_fft.cc:609] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-10-12 00:16:13.994795: E tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:1518] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-10-12 00:16:14.006002: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-10-12 00:16:16.453458: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:12<00:24, 12.48s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:18<00:08,  8.79s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:22<00:00,  6.47s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:22<00:00,  7.47s/it]
+Found max lenth: 4096
+Traceback (most recent call last):
+  File "/home/hsahijw/text-classification/finetune_llama.py", line 319, in <module>
+    train_dataset = load_our_data(
+                    ^^^^^^^^^^^^^^
+  File "/home/hsahijw/text-classification/finetune_llama.py", line 83, in load_our_data
+    table['output'] = table['labels'].apply(eval).apply(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hsahijw/miniconda3/envs/h100_env/lib/python3.11/site-packages/pandas/core/series.py", line 4760, in apply
+    ).apply()
+      ^^^^^^^
+  File "/home/hsahijw/miniconda3/envs/h100_env/lib/python3.11/site-packages/pandas/core/apply.py", line 1207, in apply
+    return self.apply_standard()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hsahijw/miniconda3/envs/h100_env/lib/python3.11/site-packages/pandas/core/apply.py", line 1287, in apply_standard
+    mapped = obj._map_values(
+             ^^^^^^^^^^^^^^^^
+  File "/home/hsahijw/miniconda3/envs/h100_env/lib/python3.11/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hsahijw/miniconda3/envs/h100_env/lib/python3.11/site-packages/pandas/core/algorithms.py", line 1814, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "lib.pyx", line 2917, in pandas._libs.lib.map_infer
+  File "<string>", line 1, in <module>
+NameError: name 'sadness' is not defined
+
+real	1m27.421s
+user	0m19.137s
+sys	0m26.917s
