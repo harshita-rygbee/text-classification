@@ -49,6 +49,7 @@ def get_train_val_test_df(config_name='tripclick', config_file_name='data_config
     cp_data.read(config_file_name)
     cp_data = cp_data[config_name]
     data_folder = cp_data['data_folder']
+    print(f"Data folder: {data_folder}")
 
     dfs = []
     for split in ['train', 'val', 'test']:
@@ -56,8 +57,8 @@ def get_train_val_test_df(config_name='tripclick', config_file_name='data_config
         df = pd.read_table(file_path).dropna()
 
         # This only works with the original files that had the labels as a string
-        # df['labels'] = df[label_field].apply(lambda x: x.split(","))
-        df['labels'] = df[label_field].apply(eval)
+        df['labels'] = df[label_field].apply(lambda x: x.split(","))
+        # df['labels'] = df[label_field].apply(eval)
         df = df.drop(label_field, axis=1)
 
         dfs.append(df)
@@ -150,7 +151,7 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_df, val_df, test_df = get_train_val_test_df('clicked_url_single_label')
+    train_df, val_df, test_df = get_train_val_test_df(args.dataset)
     # num_labels = train_df['labels'].nunique()
     label_names = list(set(list(chain.from_iterable(train_df['labels']))))
     num_labels = len(label_names)
@@ -184,9 +185,9 @@ def main():
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr, correct_bias=True)
     loss_func = BCEWithLogitsLoss()
 
-    train_loader = get_dataloader(train_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'train')
-    val_loader = get_dataloader(val_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'val')
-    test_loader = get_dataloader(test_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'test')
+    train_loader = get_dataloader(train_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'train', 'query')
+    val_loader = get_dataloader(val_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'val', 'query')
+    test_loader = get_dataloader(test_df, label_binarizer, tokenizer, args.max_length, args.batch_size, 'test', 'query')
     print(list(model.parameters()))
     for _ in trange(args.epochs, desc="Epoch"):
         training_loop(model, train_loader, optimizer, loss_func, device, num_labels)

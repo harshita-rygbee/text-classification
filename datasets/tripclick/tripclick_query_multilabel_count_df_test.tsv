@@ -1,4 +1,4 @@
-git query	counts	class_labels
+query	counts	class_labels
 omeprazole vs esomeprazole	{'gastroenterology': 8}	gastroenterology
 chemoradiotherapy oesophageal cancer	{'oncology': 10, 'gastroenterology': 12}	oncology,gastroenterology
 """metabolic syndrome"""	{'endocrinology': 17, 'cardiology': 6}	endocrinology,cardiology
